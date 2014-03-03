@@ -33,9 +33,66 @@
             Dumbledore's Army
         </div>
     </div>
+    <div class="form">
+        <p>
+            <input type = "number" id="student_count">
+            <button id = "set_student_count"> Set Student Count </button>
+        </p>
+        <p>
+            <input type = "name" id="student_name">
+            <button id = "sort_student_name"> Sort!</button>
+        </p>
+        <div id="count"> </div>
+    </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    var studentCount = 0;
+    Gryffindor = [];
+    Hufflepuff = [];
+    Ravenclaw = [];
+    Slytherin = [];
+    DumbledoresArmy = [];
+
+    var button = document.getElementById("set_student_count");
+    button.addEventListener('click', function(){
+        var studentCountDiv = document.getElementById("count");
+        var inputBoxCountValue = document.getElementById("student_count").value;
+        if (inputBoxCountValue == "") {
+            studentCount = 0;
+        };
+        studentCount =  inputBoxCountValue;
+        studentCountDiv.innerHTML = studentCount;
+        inputBoxCountValue = 0;
+    });
+
+        var houses = function(Gryffindor, Hufflepuff, Ravenclaw, Slytherin, DumbledoresArmy, studentName) {
+            this.Gryffindor = Gryffindor;
+            this.Hufflepuff = Hufflepuff;
+            this.Ravenclaw = Ravenclaw;
+            this.Slytherin = Slytherin;
+            this.DumbledoresArmy =  DumbledoresArmy || "No Student in this list";
+            this.addStudent = function(studentName){
+            //List of houses - can be accessed by index
+            var houseCount = document.getElementsByClassName("house col-md-2");
+            var maxStudentsInHouse = studentCount/5;
+            if ((this.Gryffindor).length < maxStudentsInHouse){
+                this.Gryffindor.push(studentName);    
+            };
+            //houses.Gryffindor.push(studentName);
+            console.log("Student Added to Gryffindor");
+            console.log(this.Gryffindor);
+            }
+        };
+
+        var buttonSort = document.getElementById("sort_student_name")
+        buttonSort.addEventListener('click', function(){
+        var studentName = document.getElementById('student_name').value;
+        myHouse = new houses(Gryffindor,Hufflepuff,Ravenclaw,Slytherin,DumbledoresArmy,studentName)
+        myHouse.addStudent(studentName);
+    });
+    </script>
   </body>
 </html>
