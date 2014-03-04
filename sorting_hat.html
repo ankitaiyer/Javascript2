@@ -20,18 +20,23 @@
     <div class="container">
         <div class="house col-md-2">
             Gryffindor
+            <span id="house1Students"> </span>
         </div>
         <div class="house col-md-2">
             Hufflepuff
+            <span id="house2Students"> </span>
         </div>
         <div class="house col-md-2">
             Ravenclaw
+            <span id="house3Students"> </span>
         </div>
         <div class="house col-md-2">
             Slytherin
+            <span id="house4Students"> </span>
         </div>
         <div class="house col-md-2"> 
             DumbledoresArmy
+            <span id="house5Students"> </span>
         </div>
     </div>
     <div class="form">
@@ -61,6 +66,30 @@
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+    var houses = function(Gryffindor, Hufflepuff, Ravenclaw, Slytherin, DumbledoresArmy, studentName) {
+        this.Gryffindor = Gryffindor;
+        this.Hufflepuff = Hufflepuff;
+        this.Ravenclaw = Ravenclaw;
+        this.Slytherin = Slytherin;            
+        this.DumbledoresArmy =  DumbledoresArmy;
+        this.addStudent = function(studentName){
+            var houseList = document.getElementsByClassName("house");
+            var maxStudentsInHouse = parseInt(studentCount/5 + 1);
+                //for (i = 0; i < houseList.length; i++) { 
+            var randomHouse = getRandomInt(0,4);
+            var housename = ((houseList[randomHouse]).innerHTML).trim();
+            while (this[housename].length > maxStudentsInHouse){
+                    var randomHouse = getRandomInt(0,4);
+                    var housename = ((houseList[randomHouse]).innerHTML).trim();
+            };
+            this[housename].push(studentName);
+            houseList[housename].innerHTML += studentName;
+            console.log("Student Added to ");
+            console.log(housename);
+            console.log(this[housename]);   
+        };
+    };
+
     var button = document.getElementById("set_student_count");
     button.addEventListener('click', function(){
         var studentCountDiv = document.getElementById("count");
@@ -73,43 +102,14 @@
         var inputBoxCountValue = 0;
     });
 
-        var houses = function(Gryffindor, Hufflepuff, Ravenclaw, Slytherin, DumbledoresArmy, studentName) {
-            this.Gryffindor = Gryffindor;
-            this.Hufflepuff = Hufflepuff;
-            this.Ravenclaw = Ravenclaw;
-            this.Slytherin = Slytherin;
-            this.DumbledoresArmy =  DumbledoresArmy;
-            this.addStudent = function(studentName){
-                var houseList = document.getElementsByClassName("house");
-                var maxStudentsInHouse = parseInt(studentCount/5 + 1);
-                //for (i = 0; i < houseList.length; i++) { 
-                var randomHouse = getRandomInt(0,4);
-                var housename = ((houseList[randomHouse]).innerHTML).trim();
-                    while (this[housename].length > maxStudentsInHouse){
-                        var randomHouse = getRandomInt(0,4);
-                        var housename = ((houseList[randomHouse]).innerHTML).trim();
-                    };
-                       //((this[housename]).length < maxStudentsInHouse){
-                        this[housename].push(studentName);
-                        console.log("Student Added to ");
-                        console.log(housename);
-                        console.log(this[housename]);   
-            };
-        };
-
-    var buttonSort = document.getElementById("sort_student_name")
+    var buttonSort = document.getElementById("sort_student_name");
     buttonSort.addEventListener('click', function(){
-    var studentName = document.getElementById('student_name').value;
-    myHouse = new houses(Gryffindor,Hufflepuff,Ravenclaw,Slytherin,DumbledoresArmy,studentName)
-    myHouse.addStudent(studentName);
-
-
-    studentCount = document.getElementById("student_count").value
-    document.getElementById("student_count").value = studentCount -1 ; 
-
-    }, true);
-
-    
+        var studentName = document.getElementById('student_name').value;
+        myHouse = new houses(Gryffindor,Hufflepuff,Ravenclaw,Slytherin,DumbledoresArmy,studentName)
+        myHouse.addStudent(studentName);
+        studentCount = document.getElementById("student_count").value
+        document.getElementById("student_count").value = studentCount -1 ; 
+    });
 
     </script>
   </body>
