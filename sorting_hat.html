@@ -13,6 +13,7 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
   </head>
+  <!-- Dumbledore's Army-->
   <body>
     <h1>Sorting Hat</h1>
     
@@ -29,8 +30,8 @@
         <div class="house col-md-2">
             Slytherin
         </div>
-        <div class="house col-md-2">
-            Dumbledore's Army
+        <div class="house col-md-2"> 
+            DumbledoresArmy
         </div>
     </div>
     <div class="form">
@@ -56,6 +57,10 @@
     Slytherin = [];
     DumbledoresArmy = [];
 
+    function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
     var button = document.getElementById("set_student_count");
     button.addEventListener('click', function(){
         var studentCountDiv = document.getElementById("count");
@@ -63,9 +68,9 @@
         if (inputBoxCountValue == "") {
             studentCount = 0;
         };
-        studentCount =  inputBoxCountValue;
+        var studentCount =  inputBoxCountValue;
         studentCountDiv.innerHTML = studentCount;
-        inputBoxCountValue = 0;
+        var inputBoxCountValue = 0;
     });
 
         var houses = function(Gryffindor, Hufflepuff, Ravenclaw, Slytherin, DumbledoresArmy, studentName) {
@@ -76,19 +81,20 @@
             this.DumbledoresArmy =  DumbledoresArmy;
             this.addStudent = function(studentName){
                 var houseList = document.getElementsByClassName("house");
-                var maxStudentsInHouse = studentCount/5;
-                for (i = 0; i < houseList.length; i++) {
-                    var housename = (houseList[i].innerHTML).trim();
-                    if ((this[housename]).length < maxStudentsInHouse){
+                var maxStudentsInHouse = parseInt(studentCount/5 + 1);
+                //for (i = 0; i < houseList.length; i++) { 
+                var randomHouse = getRandomInt(0,4);
+                var housename = ((houseList[randomHouse]).innerHTML).trim();
+                    while (this[housename].length > maxStudentsInHouse){
+                        var randomHouse = getRandomInt(0,4);
+                        var housename = ((houseList[randomHouse]).innerHTML).trim();
+                    };
+                       //((this[housename]).length < maxStudentsInHouse){
                         this[housename].push(studentName);
                         console.log("Student Added to ");
                         console.log(housename);
-                        console.log(this[housename]);
-                        break;    
-                    };
-                };
-  
-            }
+                        console.log(this[housename]);   
+            };
         };
 
     var buttonSort = document.getElementById("sort_student_name")
@@ -99,10 +105,12 @@
 
 
     studentCount = document.getElementById("student_count").value
-    document.getElementById("student_count").value = studentCount -1 ;
-        
+    document.getElementById("student_count").value = studentCount -1 ; 
 
     }, true);
+
+    
+
     </script>
   </body>
 </html>
