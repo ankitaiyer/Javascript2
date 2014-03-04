@@ -91,12 +91,18 @@
             }
         };
 
-        var buttonSort = document.getElementById("sort_student_name")
-        buttonSort.addEventListener('click', function(){
-        var studentName = document.getElementById('student_name').value;
-        myHouse = new houses(Gryffindor,Hufflepuff,Ravenclaw,Slytherin,DumbledoresArmy,studentName)
-        myHouse.addStudent(studentName);
-    });
+    var buttonSort = document.getElementById("sort_student_name")
+    buttonSort.addEventListener('click', function(){
+    var studentName = document.getElementById('student_name').value;
+    myHouse = new houses(Gryffindor,Hufflepuff,Ravenclaw,Slytherin,DumbledoresArmy,studentName)
+    myHouse.addStudent(studentName);
+
+
+    studentCount = document.getElementById("student_count").value
+    document.getElementById("student_count").value = studentCount -1 ;
+        
+
+    }, true);
     </script>
   </body>
 </html>
