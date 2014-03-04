@@ -73,17 +73,21 @@
             this.Hufflepuff = Hufflepuff;
             this.Ravenclaw = Ravenclaw;
             this.Slytherin = Slytherin;
-            this.DumbledoresArmy =  DumbledoresArmy || "No Student in this list";
+            this.DumbledoresArmy =  DumbledoresArmy;
             this.addStudent = function(studentName){
-            //List of houses - can be accessed by index
-            var houseCount = document.getElementsByClassName("house col-md-2");
-            var maxStudentsInHouse = studentCount/5;
-            if ((this.Gryffindor).length < maxStudentsInHouse){
-                this.Gryffindor.push(studentName);    
-            };
-            //houses.Gryffindor.push(studentName);
-            console.log("Student Added to Gryffindor");
-            console.log(this.Gryffindor);
+                var houseList = document.getElementsByClassName("house");
+                var maxStudentsInHouse = studentCount/5;
+                for (i = 0; i < houseList.length; i++) {
+                    var housename = (houseList[i].innerHTML).trim();
+                    if ((this[housename]).length < maxStudentsInHouse){
+                        this[housename].push(studentName);
+                        console.log("Student Added to ");
+                        console.log(housename);
+                        console.log(this[housename]);
+                        break;    
+                    };
+                };
+  
             }
         };
 
